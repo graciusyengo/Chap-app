@@ -20,7 +20,7 @@ function Messenger() {
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const scrollRef= useRef()
+  const scrollRef = useRef();
   const { user } = useContext(AuthContext);
   console.log(user);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -49,29 +49,24 @@ function Messenger() {
     };
     getMessages();
   }, [currentChat]);
-  const handleSubmit= async(e)=>{
-    e.preventDefault()
-    const message={
-      sender:user._id,
-     
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const message = {
+      sender: user._id,
+
       text: newMessage,
       conversationId: currentChat._id,
-    }
+    };
 
     try {
-      const res= await axios.post("/messages",message)
-      setMessages([...messages,res.data])
-      setNewMessage("")
-      
-    } catch (error) {
-      
-    }
-  
-  }
-  useEffect(()=>{
-
-    scrollRef.current?.scrollIntoView({behavior:"smooth"})
-  },[messages])
+      const res = await axios.post("/messages", message);
+      setMessages([...messages, res.data]);
+      setNewMessage("");
+    } catch (error) {}
+  };
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <>
@@ -136,16 +131,15 @@ function Messenger() {
 
                     <span></span>
                   </div>
-                 
-                  {messages.map((message,key) => (
-                    <div  ref={scrollRef}>
-                        <Message
-                      message={message}
-                      own={message.sender === user._id} key={key}
-                    />
-               
+
+                  {messages.map((message, key) => (
+                    <div ref={scrollRef}>
+                      <Message
+                        message={message}
+                        own={message.sender === user._id}
+                        key={key}
+                      />
                     </div>
-                  
                   ))}
                 </div>
 
@@ -158,14 +152,13 @@ function Messenger() {
                     ></textarea>
                     <PhotoCamera className="chatPhotoCamera" />
                   </div>
-                  <button className="chatSubmitButton"  onClick={handleSubmit}>
+                  <button className="chatSubmitButton" onClick={handleSubmit}>
                     <Send className="sendIcon" />
                   </button>
                 </div>
               </>
             ) : (
               <span className="noConversationText">
-                
                 OPEN CONVERSATION TO START CHAT
               </span>
             )}

@@ -1,0 +1,6 @@
+{
+    "trailingComma": "es5",
+    "doubleQuote": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
