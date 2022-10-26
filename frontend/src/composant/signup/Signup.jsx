@@ -12,11 +12,11 @@ function Signup() {
 
   const handleClick = async (e) => {
     e.preventDefault();
-console.log(passwordAgain.current.value)
-console.log(password.current.value)
+    console.log(passwordAgain.current.value);
+    console.log(password.current.value);
     if (passwordAgain.current.value !== password.current.value) {
       passwordAgain.current.setCustomValidity("password don't match");
-    }else{
+    } else {
       const user = {
         userName: userName.current.value,
         email: email.current.value,
@@ -58,7 +58,6 @@ console.log(password.current.value)
           </div>
           <div className="links">
             <button className="linksButton" type="submit">
-              
               account
             </button>
           </div>

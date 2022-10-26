@@ -46,6 +46,7 @@
   "devDependencies": {
     "eslint": "^8.26.0",
     "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-react": "^7.31.10",
     "prettier": "^2.7.1"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
