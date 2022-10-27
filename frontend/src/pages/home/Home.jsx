@@ -1,4 +1,3 @@
-import React from "react";
 import "./Home.css";
 import Topbar from "../../composant/topbar/Topbar";
 import Sidebar from "../../composant/sidebar/Sidebar";

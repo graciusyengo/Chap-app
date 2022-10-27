@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 function App() {
   const { user } = useContext(AuthContext);
+
   return (
     <div className="App">
       {/* <Home/> */}
@@ -24,7 +25,7 @@ function App() {
           />
           <Route
             path="/messenger"
-            element={!user ? <Navigate to="/" /> : <Messenger />}
+            element={user ?   <Messenger />:<Navigate to="/" /> } 
           />
         </Routes>
       </BrowserRouter>

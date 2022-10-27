@@ -1,4 +1,4 @@
-import React from "react";
+
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css";
 import { Link } from "react-router-dom";

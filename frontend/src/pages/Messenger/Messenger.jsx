@@ -5,7 +5,7 @@ import {
   PhotoCamera,
 } from "@material-ui/icons";
 import { AiOutlineMessage } from "react-icons/ai";
-import React from "react";
+
 import Conversation from "../../composant/conversation/Conversation";
 import Message from "../../composant/message/Message";
 import Topbar from "../../composant/topbar/Topbar";
@@ -15,15 +15,59 @@ import { AuthContext } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRef } from "react";
+// eslint-disable-next-line no-unused-vars
+import {io} from "socket.io-client";
 function Messenger() {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [arrivalMessage,setArrivalMessage] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  // const [socket, setSocket]=useState(null);
   const scrollRef = useRef();
+  const socket = useRef();
   const { user } = useContext(AuthContext);
   console.log(user);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  useEffect(()=>{
+    
+    socket.current=io("ws://localhost:8001");
+    socket.current.on("getMessage",data=>{
+      console.log(data);
+      setArrivalMessage({
+        sender: data.senderId,
+        text:data.text,
+        createdAt:Date.now(),
+      });
+
+    });
+  },[]);
+  
+  useEffect(()=>{
+    //avoids the display of a message sent by another person can be displayed while you are talking with another person
+    // arrivalMessage && currentChat?.members.includes(arrivalMessage.sender)&& setArrivalMessage([...messages,arrivalMessage]);
+
+    arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && setMessages((prev)=>[...prev,arrivalMessage]);
+  },[arrivalMessage,currentChat]);
+  console.log(arrivalMessage);
+
+
+  useEffect(()=>{
+    socket.current.emit("addUser", user._id);
+    socket.current.on("getUser",users=>{
+      console.log(users);
+
+    });
+  },[user]);
+  // console.log(socket);
+
+  // useEffect(()=>{
+  //   socket?.on("welcome",message=>{
+  //     console.log(message);
+  //   });
+  // },[socket]);
 
   useEffect(() => {
     const getConversations = async () => {
@@ -53,17 +97,25 @@ function Messenger() {
     e.preventDefault();
     const message = {
       sender: user._id,
-
       text: newMessage,
       conversationId: currentChat._id,
     };
+
+    const receiverId= currentChat.members.find(member=> member!==user._id);
+    socket.current.emit("sendMessage" ,{
+      senderId: user._id,
+      receiverId ,
+      text:newMessage
+    });
 
     try {
       const res = await axios.post("/messages", message);
       setMessages([...messages, res.data]);
       setNewMessage("");
+    // eslint-disable-next-line no-empty
     } catch (error) {}
   };
+
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -99,7 +151,8 @@ function Messenger() {
             </div>
             <div className="containerConversation">
               {conversations.map((conversation, key) => (
-                <div onClick={() => setCurrentChat(conversation)}>
+                // eslint-disable-next-line react/jsx-key
+                <div key={key} onClick={() => setCurrentChat(conversation)}>
                   <Conversation
                     conversation={conversation}
                     currentUser={user}
@@ -132,12 +185,13 @@ function Messenger() {
                     <span></span>
                   </div>
 
-                  {messages.map((message, key) => (
-                    <div ref={scrollRef}>
+                  {messages.map((message,key) => (
+                    // eslint-disable-next-line react/jsx-key
+                    <div ref={scrollRef}  key={key}>
                       <Message
                         message={message}
                         own={message.sender === user._id}
-                        key={key}
+                       
                       />
                     </div>
                   ))}
