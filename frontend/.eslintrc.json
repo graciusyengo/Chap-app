@@ -24,6 +24,8 @@
             "error",
             2
         ],
+    
+        
         "linebreak-style": [
             "error",
             "unix"
@@ -42,4 +44,5 @@
           "version": "detect"
       }
   }
+ 
 }

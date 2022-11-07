@@ -14,7 +14,8 @@ function App() {
       {/* <Home/> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={user ? <Home /> : <Signup />} />
+          <Route path="/home"  element={<Home />} />
+          <Route path="/" index element={<Login />} />
           <Route
             path="/login"
             element={user ? <Navigate to="/" /> : <Login />}
@@ -25,7 +26,7 @@ function App() {
           />
           <Route
             path="/messenger"
-            element={user ?   <Messenger />:<Navigate to="/" /> } 
+            element={user ? <Messenger /> : <Navigate to="/" />}
           />
         </Routes>
       </BrowserRouter>

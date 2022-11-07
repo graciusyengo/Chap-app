@@ -3,8 +3,11 @@ import {
   ExitToAppRounded,
   Send,
   PhotoCamera,
+  Group,
+  EmojiEmotions,
 } from "@material-ui/icons";
 import { AiOutlineMessage } from "react-icons/ai";
+import EmojiPicker from "emoji-picker-react";
 
 import Conversation from "../../composant/conversation/Conversation";
 import Message from "../../composant/message/Message";
@@ -16,13 +19,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRef } from "react";
 // eslint-disable-next-line no-unused-vars
-import {io} from "socket.io-client";
+import { io } from "socket.io-client";
 function Messenger() {
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [arrivalMessage,setArrivalMessage] = useState(null);
+  const [arrivalMessage, setArrivalMessage] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const [hideConversation, setHideConversation] = useState(false);
+  const [showEmoji, setShowEmoji] = useState(false);
   // eslint-disable-next-line no-unused-vars
   // const [socket, setSocket]=useState(null);
   const scrollRef = useRef();
@@ -31,36 +36,34 @@ function Messenger() {
   console.log(user);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  useEffect(()=>{
-    
-    socket.current=io("ws://localhost:8001");
-    socket.current.on("getMessage",data=>{
-      console.log(data);
+  useEffect(() => {
+    socket.current = io("ws://localhost:8001");
+    socket.current.on("getMessage", (data) => {
+      console.log("########", data);
       setArrivalMessage({
         sender: data.senderId,
-        text:data.text,
-        createdAt:Date.now(),
+        text: data.text,
+        createdAt: Date.now(),
       });
-
     });
-  },[]);
-  
-  useEffect(()=>{
+  }, []);
+  console.log(socket);
+
+  useEffect(() => {
     //avoids the display of a message sent by another person can be displayed while you are talking with another person
     // arrivalMessage && currentChat?.members.includes(arrivalMessage.sender)&& setArrivalMessage([...messages,arrivalMessage]);
-
-    arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && setMessages((prev)=>[...prev,arrivalMessage]);
-  },[arrivalMessage,currentChat]);
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
   console.log(arrivalMessage);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     socket.current.emit("addUser", user._id);
-    socket.current.on("getUser",users=>{
+    socket.current.on("getUser", (users) => {
       console.log(users);
-
     });
-  },[user]);
+  }, [user]);
   // console.log(socket);
 
   // useEffect(()=>{
@@ -80,7 +83,6 @@ function Messenger() {
     };
     getConversations();
   }, [user._id]);
-  console.log(currentChat);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -101,24 +103,29 @@ function Messenger() {
       conversationId: currentChat._id,
     };
 
-    const receiverId= currentChat.members.find(member=> member!==user._id);
-    socket.current.emit("sendMessage" ,{
+    const receiverId = currentChat.members.find(
+      (member) => member !== user._id
+    );
+    socket.current.emit("sendMessage", {
       senderId: user._id,
-      receiverId ,
-      text:newMessage
+      receiverId,
+      text: newMessage,
     });
 
     try {
       const res = await axios.post("/messages", message);
       setMessages([...messages, res.data]);
+      console.log(res.data);
       setNewMessage("");
-    // eslint-disable-next-line no-empty
+      // eslint-disable-next-line no-empty
     } catch (error) {}
   };
-
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+  const handleClick = () => {
+    setShowEmoji(!showEmoji);
+  };
 
   return (
     <>
@@ -135,10 +142,17 @@ function Messenger() {
               <div className="chatOnlineMessage">
                 <AiOutlineMessage className="messageIcon" />
               </div>
+              <div>
+                <Group
+                  className="chatOnlineUser"
+                  onClick={() => setHideConversation(!hideConversation)}
+                />
+              </div>
               <ExitToAppRounded className="chatOnlineLogout" />
             </div>
           </div>
         </div>
+
         <div className="chatMenus">
           <div className="chatMenusWraper">
             <div className="searchFriendsContainer">
@@ -159,13 +173,6 @@ function Messenger() {
                   />
                 </div>
               ))}
-
-              {/* <Conversation />
-              <Conversation />
-              <Conversation />
-              <Conversation />
-              <Conversation />
-              <Conversation /> */}
             </div>
           </div>
         </div>
@@ -185,13 +192,12 @@ function Messenger() {
                     <span></span>
                   </div>
 
-                  {messages.map((message,key) => (
+                  {messages.map((message, key) => (
                     // eslint-disable-next-line react/jsx-key
-                    <div ref={scrollRef}  key={key}>
+                    <div ref={scrollRef} key={key}>
                       <Message
                         message={message}
                         own={message.sender === user._id}
-                       
                       />
                     </div>
                   ))}
@@ -204,8 +210,16 @@ function Messenger() {
                       onChange={(e) => setNewMessage(e.target.value)}
                       value={newMessage}
                     ></textarea>
-                    <PhotoCamera className="chatPhotoCamera" />
+                    <div>
+                      <PhotoCamera className="chatPhotoCamera" />
+
+                      <EmojiEmotions onClick={() => handleClick()} />
+                    </div>
+                    <div className="emojiContainer">
+                      {showEmoji && <EmojiPicker />}
+                    </div>
                   </div>
+
                   <button className="chatSubmitButton" onClick={handleSubmit}>
                     <Send className="sendIcon" />
                   </button>

@@ -51,12 +51,14 @@ router.get("/", async (req, res) => {
     const user = userId
       ? await User.findById(userId)
       : await User.findOne({ username: username });
+      console.log(user)
     const { password, updatedAt, ...other } = user._doc;
     res.status(200).json(other);
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 
 //get a user by id
@@ -72,8 +74,6 @@ router.get("/:id", async (req, res) => {
 
 // follow a user
 router.put('/:id/follow',async (req,res)=>{
- 
-
   if(req.body.userId!== req.params.id){
     try {
 

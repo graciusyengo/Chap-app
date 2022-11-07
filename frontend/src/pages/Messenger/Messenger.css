@@ -78,6 +78,7 @@ border-radius: 10px;
   flex-direction: column;
 }
 .chatBoxBottom{
+  position: relative;
   margin-top: 5px ;
   display: flex;
   align-items: center;
@@ -104,6 +105,7 @@ padding-top: 15px;
   align-items: center;
   justify-content: space-between;
   border-radius: 23px;
+  position: relative;
 
 }
 .chatMessageInput{
@@ -165,6 +167,20 @@ padding-top: 15px;
   font-size: 50px !important; 
   color:white;
 }
+.chatOnlineUser{
+  width: 50px;
+  height:90px;
+  font-size: 50px;
+  margin-left: 90px;
+  border-right: 4px solid yellow;
+  cursor: pointer;
+
+  color:white;
+  background-color: #145de2;
+  font-size: 120px !important; 
+
+ 
+}
 
 .chatOnlineImage{
   width: 60px;
@@ -218,6 +234,15 @@ p{
  cursor: pointer;
  transition: color 1s;
 
+}
+/* .containerChatSendEmoji{
+
+  position: relative;
+} */
+.emojiContainer{
+  position: absolute;
+  bottom: 10px;
+  right: 0;
 }
 
 

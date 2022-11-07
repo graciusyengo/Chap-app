@@ -1,23 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
-const User= require("../models/User")
+const User = require("../models/User");
 
 //create post
-router.post("/",async (req, res) => {
- 
-  const newPost= new Post(req.body)
- 
+router.post("/", async (req, res) => {
+  const newPost = new Post(req.body);
+
   try {
-  
-    const savedPost = await newPost.save()
-    
+    const savedPost = await newPost.save();
 
     // console.log(savedPost)
     res.status(200).json(savedPost);
-  }catch(error) {
+  } catch (error) {
     res.status(500).json(error);
-
   }
 });
 //update a post
@@ -68,7 +64,6 @@ router.put("/:id/like", async (req, res) => {
   }
 });
 //get a post
-
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -79,12 +74,11 @@ router.get("/:id", async (req, res) => {
 });
 
 //get timeline posts
-
-router.get("/timeline/:userId", async(req, res) => {
+router.get("/timeline/:userId", async (req, res) => {
   try {
     const currentUser = await User.findById(req.params.userId);
     const userPosts = await Post.find({ userId: currentUser._id });
-  
+
     const friendPosts = await Promise.all(
       currentUser.followings.map((friendId) => {
         return Post.find({ userId: friendId });
