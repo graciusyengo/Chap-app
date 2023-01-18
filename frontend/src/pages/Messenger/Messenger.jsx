@@ -144,7 +144,9 @@ function Messenger() {
             />
             <div className="chatOnlineIcon">
               <div className="chatOnlineMessage">
-                <AiOutlineMessage className="messageIcon" />
+                <NavLink to="/conversationsrecents">
+                  <AiOutlineMessage className="messageIcon" />
+                </NavLink>
               </div>
               <div>
                 <NavLink to="/usersinscrits">

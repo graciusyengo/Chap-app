@@ -119,7 +119,7 @@ export default function UserInscrit() {
             />
           </div>
           <div className="chatMenusWraper">
-            <h1 className="chatRecent">List of friends</h1>
+            <h1 className="title">List of friends</h1>
             <div className="containerConversation">
               <div className="usersinscrits">
                 {usersInscrits.map((user, key) => (

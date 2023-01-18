@@ -2,6 +2,7 @@ import Messenger from "./pages/Messenger/Messenger";
 import Login from "./pages/login/Login";
 import Signup from "./composant/signup/Signup";
 import Home from "./pages/home/Home";
+import ConversationRecent from "./pages/conversationRecents/ConversationRecent";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import { useContext } from "react";
@@ -30,10 +31,8 @@ function App() {
             path="/messenger"
             element={user ? <Messenger /> : <Navigate to="/" />}
           />
-          <Route
-            path="/usersinscrits"
-            element={<UserInscrit /> }
-          />
+          <Route path="/usersinscrits" element={<UserInscrit/>} />
+          <Route path="/conversationsrecents" element={< ConversationRecent/>} />
         </Routes>
       </BrowserRouter>
     </div>
