@@ -77,7 +77,7 @@ function Messenger() {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("conversations/" + user._id);
+        const res = await axios.get("conversations/" + user.user._id);
         setConversations(res.data);
         console.log("########",conversations);
       } catch (error) {
@@ -85,7 +85,7 @@ function Messenger() {
       }
     };
     getConversations();
-  }, [user._id]);
+  }, [user.user._id]);
 
   useEffect(() => {
     const getMessages = async () => {
