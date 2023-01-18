@@ -50,8 +50,8 @@ function Topbar() {
         </div>
         <img
           src={
-            user.profilePicture
-              ? PF + user.profilePicture
+            user?.profilePicture
+              ? PF + user?.profilePicture
               : PF + "person/avatar.jpeg"
           }
           alt="profile"

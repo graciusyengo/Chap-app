@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+
 function App() {
   const { user } = useContext(AuthContext);
 
@@ -14,8 +15,8 @@ function App() {
       {/* <Home/> */}
       <BrowserRouter>
         <Routes>
-          <Route path="/home"  element={<Home />} />
-          <Route path="/" index element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route
             path="/login"
             element={user ? <Navigate to="/" /> : <Login />}
@@ -27,6 +28,10 @@ function App() {
           <Route
             path="/messenger"
             element={user ? <Messenger /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/registedUsers"
+            element={<UsersInscrits /> }
           />
         </Routes>
       </BrowserRouter>

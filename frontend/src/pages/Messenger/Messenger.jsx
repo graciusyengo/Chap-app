@@ -8,6 +8,7 @@ import {
 } from "@material-ui/icons";
 import { AiOutlineMessage } from "react-icons/ai";
 import EmojiPicker from "emoji-picker-react";
+import { NavLink } from "react-router-dom";
 
 import Conversation from "../../composant/conversation/Conversation";
 import Message from "../../composant/message/Message";
@@ -143,10 +144,12 @@ function Messenger() {
                 <AiOutlineMessage className="messageIcon" />
               </div>
               <div>
-                <Group
-                  className="chatOnlineUser"
-                  onClick={() => setHideConversation(!hideConversation)}
-                />
+                <NavLink to="/registedUsers">
+                  <Group
+                    className="chatOnlineUser"
+                    onClick={() => setHideConversation(!hideConversation)}
+                  />
+                </NavLink>
               </div>
               <ExitToAppRounded className="chatOnlineLogout" />
             </div>
