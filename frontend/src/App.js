@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import UserInscrit from "./pages/usersInscrits/UsersInscrits";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -30,8 +31,8 @@ function App() {
             element={user ? <Messenger /> : <Navigate to="/" />}
           />
           <Route
-            path="/registedUsers"
-            element={<UsersInscrits /> }
+            path="/usersinscrits"
+            element={<UserInscrit /> }
           />
         </Routes>
       </BrowserRouter>

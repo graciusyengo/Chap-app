@@ -10,7 +10,7 @@ import { AiOutlineMessage } from "react-icons/ai";
 import EmojiPicker from "emoji-picker-react";
 import Message from "../../composant/message/Message";
 import Topbar from "../../composant/topbar/Topbar";
-import UsersInscrits from "../../composant/usersinscrits/UsersInscrits";
+import UsersInscrits from "../../composant/usersinscrits/UsersInscrit";
 import { useContext } from "react";
 import "./usersinscrits.css";
 import { AuthContext } from "../../context/AuthContext";
@@ -123,7 +123,7 @@ export default function UserInscrit() {
             <div className="containerConversation">
               <div className="usersinscrits">
                 {usersInscrits.map((user, key) => (
-                  <UsersInscrits user={user} key={key} />
+                  <UsersInscrits user={user} key={key}/>
                 ))}
               </div>
             </div>

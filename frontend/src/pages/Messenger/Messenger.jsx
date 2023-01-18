@@ -72,12 +72,14 @@ function Messenger() {
   //     console.log(message);
   //   });
   // },[socket]);
+  console.log("=====",user.user._id);
 
   useEffect(() => {
     const getConversations = async () => {
       try {
         const res = await axios.get("conversations/" + user._id);
         setConversations(res.data);
+        console.log("########",conversations);
       } catch (error) {
         console.log(error);
       }
@@ -144,7 +146,7 @@ function Messenger() {
                 <AiOutlineMessage className="messageIcon" />
               </div>
               <div>
-                <NavLink to="/registedUsers">
+                <NavLink to="/usersinscrits">
                   <Group
                     className="chatOnlineUser"
                     onClick={() => setHideConversation(!hideConversation)}
@@ -172,6 +174,7 @@ function Messenger() {
                 <div key={key} onClick={() => setCurrentChat(conversation)}>
                   <Conversation
                     conversation={conversation}
+                    
                     currentUser={user}
                   />
                 </div>

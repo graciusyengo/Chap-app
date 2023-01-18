@@ -41,7 +41,7 @@ router.post("/login", async(req, res) => {
     
     !validPassword && res.status(400).json("wrong password");
 
-      //  res.status(200).json(user)
+        // res.status(200).json(user)
 
     const payload={
       email:user.email,
@@ -58,7 +58,7 @@ router.post("/login", async(req, res) => {
   
     
     
-     res.status(200).json(user)
+     
   } catch (error) {
     res.status(500).json(error)
   }
