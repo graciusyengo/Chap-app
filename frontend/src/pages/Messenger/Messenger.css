@@ -2,21 +2,25 @@
 
 .Messenger {
   display: flex;
+  position: fixed;
+  right: 2%;
+  left: 2%;
   
   height: calc(100vh - 70px);
   margin-top: 20px;
 }
 .chatMenus {
   flex: 3.5;
+  height: 90%;
   
 }
  .chatMenusWraper{
    position: relative;
-  
-
-  
- 
-
+   margin-top: 13px;
+   box-shadow: -12px 8px 15px 2px rgba(0,0,0,0.1);
+   overflow-y: scroll;
+    width: 90%; 
+    height: 90%;
 
 } 
 .chatMenusInput {
@@ -31,15 +35,14 @@
   flex: 5.5;
   margin-right:20px ;
   border-radius: 10px;
-  box-shadow: 1px 1px 1px gray;
- 
-  
+  height: 90%; 
 }
 .chatBoxInfo{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid  gray;
+  border-bottom: 1px solid rgba(0,0,22,0.2);
+
 
 }
 .chatBoxContainerName{
@@ -61,6 +64,8 @@
   height: 100%;
   overflow-y: scroll;
   padding-right: 10px;
+  padding-left: 10px;
+  box-shadow: -12px 8px 15px 2px rgba(0,0,0,0.1);
   
 }
 .chatBoxTop img{
@@ -73,7 +78,8 @@
 
 .chatBoxWraper{
 background-color:#fff;
-box-shadow: 1px 1px 1px gray;
+height: 100%;
+
 border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -84,7 +90,8 @@ border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid gray;
+ 
+ 
 padding-top: 15px;
 
 }
@@ -139,6 +146,7 @@ padding-top: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 90%;
 }
 .chatOnlineIcon{
   height: 100%;
@@ -175,7 +183,6 @@ padding-top: 15px;
   margin-left: 90px;
   border-right: 4px solid yellow;
   cursor: pointer;
-
   color:white;
   background-color: #145de2;
   font-size: 120px !important; 
@@ -189,23 +196,24 @@ padding-top: 15px;
   object-fit: cover;
   border-radius: 50%;
 }
-.chatMenusWraper,.chatBoxWraper,.chatOnlineWraper{
+/* .chatBoxWraper,.chatOnlineWraper{
  
   height: 100%;
   padding: 10px;
-}
+} */
 p{
   margin:0;
+}
+wrapperConversation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .containerConversation{
 
   border-radius: 10px;
   width: 90%;
-  
-  
- border: gray;
 
-  /* box-shadow: 1px 1px 1px gray; */
 
 }
 .searchFriendsContainer{
@@ -214,7 +222,7 @@ p{
   display: flex;
   align-items: center;
   width: 90%;
-  box-shadow: 1px 1px 1px gray;
+  box-shadow: -12px 8px 15px 2px rgba(0,0,0,0.1);
 
 }
 .searchIconFriend{

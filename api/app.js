@@ -39,9 +39,6 @@ require("./config/passport")
  app.use("/api/messages",messageRoute)
  app.use("/api/conversations",conversationRoute)
 
- 
-
- 
 
 app.listen(8000,()=>{
     console.log("backend server run in port 8000")

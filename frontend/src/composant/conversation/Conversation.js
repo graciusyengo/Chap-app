@@ -7,6 +7,7 @@ import "./conversation.css";
 function Conversation({ conversation, currentUser }) {
   const [user, setUser] = useState(null);
   console.log(currentUser.user._id);
+  console.log(conversation);
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   // console.log(conversation)
@@ -14,11 +15,11 @@ function Conversation({ conversation, currentUser }) {
 
   useEffect(() => {
     const friendId = conversation.members.find(
-      (members) => members !== currentUser.user._id
+      (member) => member !== currentUser.user._id
     );
     const getUser = async () => {
       try {
-        const res = await axios("/users?userId=" + friendId);
+        const res = await axios("/users/" + friendId);
         setUser(res.data);
       } catch (error) {
         console.log(error);
@@ -44,6 +45,7 @@ function Conversation({ conversation, currentUser }) {
         <span className="conversationName"> {user?.userName}</span>
         <div className="conversationBadge"></div>
       </div>
+      <hr></hr>
     </div>
   );
 }

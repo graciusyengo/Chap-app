@@ -72,14 +72,15 @@ function Messenger() {
   //     console.log(message);
   //   });
   // },[socket]);
-  console.log("=====",user.user._id);
+  console.log("=====", user.user._id);
+  console.log(user);
 
   useEffect(() => {
     const getConversations = async () => {
       try {
         const res = await axios.get("conversations/" + user.user._id);
         setConversations(res.data);
-        console.log("########",conversations);
+        console.log("########", conversations);
       } catch (error) {
         console.log(error);
       }
@@ -159,26 +160,28 @@ function Messenger() {
         </div>
 
         <div className="chatMenus">
+          <div className="searchFriendsContainer">
+            <Search className="searchIconFriend" />
+            <input
+              type="text"
+              placeholder="Search your friends"
+              className="chatMenusInput"
+            />
+          </div>
           <div className="chatMenusWraper">
-            <div className="searchFriendsContainer">
-              <Search className="searchIconFriend" />
-              <input
-                type="text"
-                placeholder="Search your friends"
-                className="chatMenusInput"
-              />
-            </div>
-            <div className="containerConversation">
-              {conversations.map((conversation, key) => (
-                // eslint-disable-next-line react/jsx-key
-                <div key={key} onClick={() => setCurrentChat(conversation)}>
-                  <Conversation
-                    conversation={conversation}
-                    
-                    currentUser={user}
-                  />
-                </div>
-              ))}
+            <h2> Recent Conversations</h2>
+            <div className="wrapperConversation">
+              <div className="containerConversation">
+                {conversations.map((conversation, key) => (
+                  // eslint-disable-next-line react/jsx-key
+                  <div key={key} onClick={() => setCurrentChat(conversation)}>
+                    <Conversation
+                      conversation={conversation}
+                      currentUser={user}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

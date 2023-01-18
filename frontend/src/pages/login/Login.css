@@ -131,6 +131,13 @@
     border-radius: 4px;
     font-weight: 500;
     cursor: pointer;
+    color:#fff;
+    transition: all 0.3s ease ;
+    
+}
+.linksButton:hover{
+    transform: scale(1.05);
+   
     
 }
 .linksButton:active{

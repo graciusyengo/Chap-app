@@ -123,7 +123,7 @@ export default function UserInscrit() {
             <div className="containerConversation">
               <div className="usersinscrits">
                 {usersInscrits.map((user, key) => (
-                  <UsersInscrits user={user} key={key}/>
+                  <UsersInscrits user={user} key={key} />
                 ))}
               </div>
             </div>
