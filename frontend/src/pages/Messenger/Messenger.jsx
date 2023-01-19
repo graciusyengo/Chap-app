@@ -143,11 +143,12 @@ function Messenger() {
               alt="person"
             />
             <div className="chatOnlineIcon">
-              <div className="chatOnlineMessage">
-                <NavLink to="/conversationsrecents">
+              <NavLink to="/conversationsrecents">
+                <div className="chatOnlineMessage">
                   <AiOutlineMessage className="messageIcon" />
-                </NavLink>
-              </div>
+                </div>
+              </NavLink>
+
               <div>
                 <NavLink to="/usersinscrits">
                   <Group
@@ -171,7 +172,7 @@ function Messenger() {
             />
           </div>
           <div className="chatMenusWraper">
-            <h2> Recent Conversations</h2>
+            <h2 className="title"> Recent Conversations</h2>
             <div className="wrapperConversation">
               <div className="containerConversation">
                 {conversations.map((conversation, key) => (

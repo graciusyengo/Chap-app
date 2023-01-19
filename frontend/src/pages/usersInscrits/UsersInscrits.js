@@ -17,6 +17,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRef } from "react";
+import "../Messenger/Messenger.css";
 // eslint-disable-next-line no-unused-vars
 import { io } from "socket.io-client";
 import { useNavigate, NavLink } from "react-router-dom";
@@ -89,12 +90,12 @@ export default function UserInscrit() {
               alt="person"
             />
             <div className="chatOnlineIcon">
-              <NavLink to="/conversations-recents">
+              <NavLink to="/conversationsrecents">
                 <div className="chatOnlineMessage">
                   <AiOutlineMessage className="messageIcon" />
                 </div>
               </NavLink>
-              <NavLink className="navLink" to="/users-inscrit">
+              <NavLink to="/usersinscrits">
                 <div>
                   <Group
                     className="chatOnlineUser"
@@ -140,10 +141,8 @@ export default function UserInscrit() {
                     <span className="chatBoxName"> Gracius </span>
                     <span className="chatBoxNameOnline"> online</span>
                   </div>
-
                   <span></span>
                 </div>
-
                 <>
                   <div>
                     <Message />

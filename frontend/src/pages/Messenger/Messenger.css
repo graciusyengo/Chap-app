@@ -84,6 +84,12 @@ border-radius: 10px;
   display: flex;
   flex-direction: column;
 }
+.title{
+  font-size: 20px;
+    text-align: center;
+    margin-top: 14px;
+
+}
 .chatBoxBottom{
   position: relative;
   margin-top: 5px ;
@@ -160,11 +166,16 @@ padding-top: 15px;
 .chatOnlineMessage{
   width: 50px ;
   height:90px;
-  font-size: 0px ;
+  font-size: 40px ;
   margin-left: 90px;
   margin-top: 15px;
   color:white;
   background-color: #145de2;
+  
+  cursor: pointer;
+
+}
+.active{
   border-right: 4px solid yellow;
   cursor: pointer;
 
@@ -181,7 +192,6 @@ padding-top: 15px;
   height:90px;
   font-size: 50px;
   margin-left: 90px;
-  border-right: 4px solid yellow;
   cursor: pointer;
   color:white;
   background-color: #145de2;
@@ -189,6 +199,9 @@ padding-top: 15px;
 
  
 }
+/* .active{
+  border-right: 4px solid yellow;
+} */
 
 .chatOnlineImage{
   width: 60px;
